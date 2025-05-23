@@ -3,10 +3,15 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import scipy
 import numpy as np
+from scipy.stats import f_oneway
 
 class DataAnalyzer:
-    def __init__(self, dataframe):
-        self.data = dataframe
+    def __init__(self,
+                  df:pd.DataFrame,
+                  target_col:str=None):
+        self.data = df
+        self.data.columns = [col.lower() for col in self.data.columns]
+        self.target_col = target_col
 
     def column_details(self, sort_by='unique_count', ascending=True):
         """
@@ -185,3 +190,21 @@ class DataAnalyzer:
         # profile.to_file(output_file)
         # return f"Report saved to {output_file}"
         pass
+
+    def check_statistical_significance(self,feature_col:str,target_col:str):
+        if self.data[feature_col].dtype == "object":
+            grouped = self.data.groupby(by=feature_col)[target_col].apply(list).to_dict()
+        else:
+            grouped = self.data.groupby(by=target_col)[feature_col].apply(list).to_dict()
+        return f_oneway(*[group for group in grouped.values() if len(group)>1])
+    
+    def get_numerical_corr(self):
+        """Get correlation matrix for numerical columns"""
+        return self.data[[col for col in self.data if self.data[col].dtype in ('int','float')]].corr()
+    
+    def visualize_continuous_var(self,feature_col:str,target_col:str):
+        return sns.scatter(self.data, x=feature_col, y=target_col, trendline="ols", title=f"{feature_col} vs {target_col}")
+
+    def visualize_categorical_var(self,feature_col:str,target_col:str):
+        return sns.catplot(data=self.data, x=feature_col, y=target_col, kind="box", title=f"{feature_col} vs {target_col}")
+    
