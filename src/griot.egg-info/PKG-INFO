@@ -1,0 +1,9 @@
+Metadata-Version: 2.4
+Name: griot
+Version: 0.0.1+20250523.151526
+Summary: wheel file based on griot/src
+Author: khanbrackly@gmail.com
+Requires-Dist: setuptools
+Dynamic: author
+Dynamic: requires-dist
+Dynamic: summary
