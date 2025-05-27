@@ -7,12 +7,11 @@ sys.path.append("./src")
 import datetime
 import griot
 
-local_version = datetime.datetime.utcnow().strftime("%Y%m%d.%H%M%S")
 
 setup(
     name="griot",
 
-    version=griot.__version__ + "+" + local_version,
+    version=griot.__version__ ,
     author="khanbrackly@gmail.com",
     description="wheel file based on griot/src",
     packages=find_packages(where="./src"),

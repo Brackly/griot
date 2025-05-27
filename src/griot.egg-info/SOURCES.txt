@@ -1,3 +1,4 @@
+LICENSE
 README.md
 setup.py
 src/griot/__init__.py
@@ -7,6 +8,11 @@ src/griot.egg-info/dependency_links.txt
 src/griot.egg-info/entry_points.txt
 src/griot.egg-info/requires.txt
 src/griot.egg-info/top_level.txt
+src/griot/analysis/__init__.py
+src/griot/analysis/analyzer.py
+src/griot/data_helpers/__init__.py
+src/griot/data_helpers/utils.py
 src/griot/models/__init__.py
 src/griot/models/Bayesian/__init__.py
 src/griot/models/Frequentist/__init__.py
+src/griot/models/Frequentist/regression.py
